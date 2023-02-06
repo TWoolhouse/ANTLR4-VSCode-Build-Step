@@ -1,0 +1,41 @@
+{
+	// Use IntelliSense to learn about possible attributes.
+	// Hover to view descriptions of existing attributes.
+	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"type": "java",
+			"name": "Parse Word",
+			"request": "launch",
+			"mainClass": "org.antlr.v4.gui.TestRig",
+			"classPaths": [
+				"${workspaceFolder}/antlr-4.11.1-complete.jar",
+				"${workspaceFolder}/bin/${fileBasenameNoExtension}"
+			],
+			"args": [
+				"${fileBasenameNoExtension}",
+				"${input:parse_root_symbol}",
+				"-${input:parse_output_type}",
+			],
+			"preLaunchTask": "Build Grammar"
+		}
+	],
+	"inputs": [
+		{
+			"id": "parse_root_symbol",
+			"type": "promptString",
+			"description": "The root symbol of the grammar"
+		},
+		{
+			"id": "parse_output_type",
+			"type": "pickString",
+			"description": "The type of generated output",
+			"default": "gui",
+			"options": [
+				"gui",
+				"tree",
+			]
+		},
+	]
+}

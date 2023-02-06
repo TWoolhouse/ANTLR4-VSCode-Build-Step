@@ -1,0 +1,45 @@
+{
+	// See https://go.microsoft.com/fwlink/?LinkId=733558
+	// for the documentation about the tasks.json format
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Generate Code",
+			"type": "shell",
+			"command": "java",
+			"args": [
+				"-cp",
+				"${workspaceFolder}/antlr-4.11.1-complete.jar",
+				"org.antlr.v4.Tool",
+				"-o",
+				"${workspaceFolder}/build/${fileBasenameNoExtension}",
+				"${file}"
+			],
+			"detail": "Generates the Java code of the parser and lexer.",
+			"group": "build"
+		},
+		{
+			"label": "Build Grammar",
+			"type": "shell",
+			"command": "javac",
+			"args": [
+				"-d",
+				"${workspaceFolder}/bin/${fileBasenameNoExtension}",
+				"${workspaceFolder}/build/${fileBasenameNoExtension}/${fileBasenameNoExtension}*.java",
+			],
+			"detail": "Compiles the grammar into a Java program.",
+			"options": {
+				"env": {
+					"CLASSPATH": "${workspaceFolder}/antlr-4.11.1-complete.jar;%CLASSPATH%"
+				}
+			},
+			"dependsOn": [
+				"Generate Code"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		},
+	],
+}
